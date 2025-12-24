@@ -3,8 +3,8 @@
  */
 export function errorHandler(error, request, reply) {
   const { log } = request;
-  
-  // Log the error
+
+  // Log the error for internal tracking
   log.error({
     err: error,
     request: {
@@ -15,20 +15,17 @@ export function errorHandler(error, request, reply) {
     }
   }, 'Request error');
 
-  // Joi validation errors
+  // AJV / Fastify validation errors
   if (error.validation) {
     return reply.code(400).send({
       error: 'Validation Error',
-      message: error.message,
-      details: error.validation
-    });
-  }
-
-  // Fastify validation errors
-  if (error.statusCode === 400) {
-    return reply.code(400).send({
-      error: 'Bad Request',
-      message: error.message
+      message: 'The request data is invalid',
+      // Map AJV errors to a cleaner format for the frontend/tests
+      details: error.validation.map(err => ({
+        field: err.instancePath.replace('/', '') || err.params.missingProperty,
+        message: err.message,
+        keyword: err.keyword
+      }))
     });
   }
 
@@ -48,11 +45,18 @@ export function errorHandler(error, request, reply) {
     });
   }
 
+  // Rate limit errors
+  if (error.statusCode === 429) {
+    return reply.code(429).send({
+      error: 'Too Many Requests',
+      message: error.message
+    });
+  }
+
   // Default to 500 for unknown errors
+  const isDev = process.env.NODE_ENV === 'development';
   return reply.code(500).send({
     error: 'Internal Server Error',
-    message: process.env.NODE_ENV === 'development' 
-      ? error.message 
-      : 'An unexpected error occurred'
+    message: isDev ? error.message : 'An unexpected error occurred'
   });
 }
