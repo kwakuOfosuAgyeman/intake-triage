@@ -109,3 +109,5 @@ To run tests
 ```bash
 npm test
 ```
+
+Link to presentation: https://drive.google.com/file/d/1_auhEoOiw_bM023DyCflJQTE4yzh_Hr5/view?usp=sharing
