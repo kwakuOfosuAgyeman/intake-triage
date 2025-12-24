@@ -1,0 +1,20 @@
+{
+  "name": "intake-triage",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kwakuOfosuAgyeman/intake-triage#readme",
+  "bugs": {
+    "url": "https://github.com/kwakuOfosuAgyeman/intake-triage/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwakuOfosuAgyeman/intake-triage.git"
+  },
+  "license": "ISC",
+  "author": "Kwaku Ofosu-Agyeman",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
