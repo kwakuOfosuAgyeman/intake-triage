@@ -78,6 +78,7 @@ Asynchronous Job Processing for if I include a more accurate form for classifica
 Using Web sockets for notifications for admins
 Much more advanced searching functionality
 React Frontend For a better user experience
+Use of an ORM to help prevent injection attacks
 
 
 **Installation**
