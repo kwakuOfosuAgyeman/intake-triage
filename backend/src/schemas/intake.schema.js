@@ -13,12 +13,13 @@ export const intakeSchema = {
 export const updateIntakeSchema = {
     type: 'object',
     minProperties: 1,
-    category: { 
-      type: 'string', 
-      enum: ['billing', 'technical_support', 'new_matter_project', 'other'] 
-    },
+   
     properties: {
         status: { type: 'string', enum: ['new', 'in_review', 'resolved'] },
-        internal_notes: { type: 'string', maxLength: 5000 }
+        internal_notes: { type: 'string', maxLength: 5000 },
+        category: { 
+            type: 'string', 
+            enum: ['billing', 'technical_support', 'new_matter_project', 'other'] 
+        },
     }
 };
